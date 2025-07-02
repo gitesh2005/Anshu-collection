@@ -18,8 +18,8 @@ export function ContactModal({ isOpen, onClose, selectedProduct }: ContactModalP
 
   // Business contact information
   const businessInfo = {
-    whatsappNumber: '+918307552640',
-    phoneNumber: '8307552640',
+    whatsappNumber: '+918816831181',
+    phoneNumber: '8816831181',
     businessName: 'Shri Hari Collection',
     email: 'giteshsorout@gmail.com',
     address: 'Shekh Pura, Kithwari Chowk, Pawal, Haryana, India'

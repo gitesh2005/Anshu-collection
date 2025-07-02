@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { ProductDetail } from './components/ProductDetail';
 import { ContactModal } from './components/ContactModal';
-import { AdminPanel } from './components/AdminPanel';
+import AdminPanel from './components/AdminPanel';
 import { AdminLogin } from './components/AdminLogin';
 import { Home } from './pages/Home';
 import { Products } from './pages/Products';
