@@ -104,7 +104,7 @@ export const sampleProducts: Product[] = [
     description: 'Beautiful embroidered kurti with modern design. Perfect for office wear and casual outings.',
     price: 1299,
     images: [
-      'https://images.pexels.com/photos/8566476/pexels-photo-8566476.jpeg'
+      'https://github.com/gitesh2005/Anshu-collection/blob/main/pics/IMG-20250702-WA0027.jpg'
     ],
     category: 'kurtis',
     subcategory: 'Embroidered Kurtis',
