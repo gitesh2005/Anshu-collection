@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Plus, Edit, Trash2, Save, Camera, LogOut, Shield, Upload, Image, Database, Download, FileUp, AlertCircle, CheckCircle } from 'lucide-react';
 import { Product, AdminProduct, ProductCategory } from '../types/Product';
 import { ImageUploader } from './ImageUploader';
+import { ImageDisplay } from './ImageDisplay';
 import { getImageStorageInfo } from '../utils/imageUpload';
 
 interface AdminPanelProps {
@@ -440,7 +441,7 @@ export function AdminPanel({
                   className="border border-gray-700 rounded-lg p-4 flex items-center space-x-4 hover:shadow-md transition-all duration-200 animate-fadeInUp netflix-card-gradient"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <img
+                  <ImageDisplay
                     src={product.images[0]}
                     alt={product.name}
                     className="w-16 h-16 object-cover rounded-lg"
@@ -586,9 +587,15 @@ export function AdminPanel({
                 <div className="space-y-2">
                   {formData.images.map((image, index) => (
                     <div key={index} className="flex items-center space-x-2 animate-fadeIn">
-                      <img src={image} alt={`Product ${index + 1}`} className="w-16 h-16 object-cover rounded-lg border border-gray-600" />
+                      <ImageDisplay 
+                        src={image} 
+                        alt={`Product ${index + 1}`} 
+                        className="w-16 h-16 object-cover rounded-lg border border-gray-600" 
+                      />
                       <div className="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white text-sm">
-                        {image.startsWith('data:') ? `Uploaded Image ${index + 1}` : `Image ${index + 1} (URL)`}
+                        {image.startsWith('global-image://') ? `Uploaded Image ${index + 1}` : 
+                         image.startsWith('data:') ? `Local Image ${index + 1}` : 
+                         `Image ${index + 1} (URL)`}
                       </div>
                       <button
                         type="button"
@@ -654,7 +661,7 @@ export function AdminPanel({
                   <div className="mt-2 p-3 bg-blue-900 bg-opacity-20 rounded-lg border border-blue-700">
                     <p className="text-xs text-blue-300">
                       💡 <strong>Tip:</strong> Upload images directly from your computer or use URLs from services like Pexels, Unsplash.
-                      Uploaded images are stored locally in your browser.
+                      Uploaded images are stored globally and will be visible to all website visitors.
                     </p>
                   </div>
                 </div>

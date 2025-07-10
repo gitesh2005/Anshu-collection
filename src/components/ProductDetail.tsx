@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { X, MessageCircle, Share2, ChevronLeft, ChevronRight, Phone } from 'lucide-react';
 import { Product } from '../types/Product';
-import { ImageHoverPreview } from './ImageHoverPreview';
+import { ImageDisplay } from './ImageDisplay';
 
 interface ProductDetailProps {
   product: Product;
@@ -42,7 +42,7 @@ export function ProductDetail({ product, onClose, onContactForProduct }: Product
             {/* Image Gallery */}
             <div className="space-y-4">
               <div className="relative">
-                <ImageHoverPreview
+                <ImageDisplay
                   src={product.images[currentImageIndex]}
                   alt={product.name}
                   className="w-full h-96 object-cover rounded-lg"
@@ -68,13 +68,14 @@ export function ProductDetail({ product, onClose, onContactForProduct }: Product
               {product.images.length > 1 && (
                 <div className="flex space-x-2 overflow-x-auto">
                   {product.images.map((image, index) => (
-                    <ImageHoverPreview
+                    <ImageDisplay
                       key={index}
                       src={image}
                       alt={`${product.name} ${index + 1}`}
                       className={`w-20 h-20 object-cover rounded-md cursor-pointer ${
                         index === currentImageIndex ? 'ring-2 ring-red-500' : ''
                       }`}
+                      onClick={() => setCurrentImageIndex(index)}
                     />
                   ))}
                 </div>

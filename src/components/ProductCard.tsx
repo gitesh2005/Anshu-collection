@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MessageCircle, Eye, Phone } from 'lucide-react';
 import { Product } from '../types/Product';
-import { ImageHoverPreview } from './ImageHoverPreview';
+import { ImageDisplay } from './ImageDisplay';
 
 interface ProductCardProps {
   product: Product;
@@ -23,7 +23,7 @@ export function ProductCard({ product, onViewDetails, onContactForProduct }: Pro
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative overflow-hidden">
-        <ImageHoverPreview
+        <ImageDisplay
           src={product.images[0]}
           alt={product.name}
           className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"

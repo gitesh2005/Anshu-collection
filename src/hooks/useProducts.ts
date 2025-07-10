@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Product, AdminProduct, ProductCategory } from '../types/Product';
 import { sampleProducts } from '../data/products';
+import { resolveImageUrl } from '../utils/imageUpload';
 
 // Storage configuration for large datasets
 const STORAGE_CONFIG = {
@@ -43,8 +44,15 @@ export function useProducts() {
           const parsed = JSON.parse(savedProducts);
           
           if (Array.isArray(parsed)) {
+            // Ensure all images are properly resolved
+            const resolvedProducts = parsed.map(product => ({
+              ...product,
+              images: product.images.map((img: string) => resolveImageUrl(img)),
+              createdAt: product.createdAt instanceof Date ? product.createdAt : new Date(product.createdAt),
+              updatedAt: product.updatedAt instanceof Date ? product.updatedAt : new Date(product.updatedAt)
+            }));
             console.log(`Loaded ${parsed.length} products from storage`);
-            setProducts(parsed);
+            setProducts(resolvedProducts);
           } else {
             console.warn('Saved products is not an array, using sample products');
             await initializeWithSampleProducts();
