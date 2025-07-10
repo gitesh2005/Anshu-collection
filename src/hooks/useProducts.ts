@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Product, AdminProduct, ProductCategory } from '../types/Product';
 import { sampleProducts } from '../data/products';
-import { resolveImageUrl } from '../utils/imageUpload';
 
 // Storage configuration for large datasets
 const STORAGE_CONFIG = {
