@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Search, Menu, X, User, Phone, MessageCircle, LogOut, Shield } from 'lucide-react';
+import { Search, Menu, X, User, Phone, MessageCircle, LogOut, Shield, Smartphone, QrCode, Wifi } from 'lucide-react';
+import { QRCodeGenerator } from './QRCodeGenerator';
+import { CrossDeviceSync } from './CrossDeviceSync';
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -24,6 +26,10 @@ export function Header({
 }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showQRCode, setShowQRCode] = useState(false);
+  const [showSync, setShowSync] = useState(false);
+  
+  const currentUrl = window.location.href;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,6 +87,26 @@ export function Header({
             </button>
             <button className="p-2 text-gray-400 hover:text-red-500 transition-all duration-200 hover:bg-gray-800 rounded-lg">
               <User size={20} />
+            </button>
+            
+            {/* Phone Access Button */}
+            <button
+              onClick={() => setShowQRCode(true)}
+              className="hidden md:flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 hover:shadow-lg"
+              title="Access on Phone"
+            >
+              <Smartphone size={16} />
+              <span>Phone Access</span>
+            </button>
+            
+            {/* Sync Button */}
+            <button
+              onClick={() => setShowSync(true)}
+              className="hidden md:flex items-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 transform hover:scale-105 hover:shadow-lg"
+              title="Sync Across Devices"
+            >
+              <Wifi size={16} />
+              <span>Sync</span>
             </button>
             
             {/* Admin Button with Authentication Status */}
@@ -156,6 +182,20 @@ export function Header({
             
             {/* Mobile Admin Button */}
             <div className="flex space-x-2">
+              <button
+                onClick={() => setShowQRCode(true)}
+                className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-105"
+              >
+                <QrCode size={16} />
+                <span>Phone Access</span>
+              </button>
+              <button
+                onClick={() => setShowSync(true)}
+                className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 transform hover:scale-105"
+              >
+                <Wifi size={16} />
+                <span>Sync</span>
+              </button>
               {isAuthenticated && (
                 <button
                   onClick={onAdminLogout}
@@ -180,6 +220,22 @@ export function Header({
           </div>
         </nav>
       </div>
+      
+      {/* QR Code Modal */}
+      {showQRCode && (
+        <QRCodeGenerator
+          websiteUrl={currentUrl}
+          onClose={() => setShowQRCode(false)}
+        />
+      )}
+      
+      {/* Sync Modal */}
+      {showSync && (
+        <CrossDeviceSync
+          isOpen={showSync}
+          onClose={() => setShowSync(false)}
+        />
+      )}
     </header>
   );
 }

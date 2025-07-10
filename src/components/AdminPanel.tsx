@@ -379,6 +379,22 @@ export function AdminPanel({
                   <span>Import</span>
                 </button>
                 <button
+                  onClick={() => {
+                    const syncCode = Math.random().toString(36).substr(2, 8).toUpperCase();
+                    const currentData = {
+                      products: localStorage.getItem('shri_hari_products'),
+                      images: localStorage.getItem('global_product_images'),
+                      timestamp: Date.now()
+                    };
+                    localStorage.setItem(`sync_${syncCode}`, JSON.stringify(currentData));
+                    alert(`✅ Sync code generated: ${syncCode}\n\nUse this code on other devices to sync all data.`);
+                  }}
+                  className="flex items-center space-x-2 px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all duration-200 transform hover:scale-105 text-sm"
+                >
+                  <Wifi size={14} />
+                  <span>Generate Sync</span>
+                </button>
+                <button
                   onClick={handleClearAll}
                   className="flex items-center space-x-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all duration-200 transform hover:scale-105 text-sm"
                 >
