@@ -234,6 +234,7 @@ export class ImageUploadService {
       const imageId = imageUrl.replace('global-image://', '');
       const base64Data = this.globalStorage.getImage(imageId);
       if (base64Data) {
+        console.log(`✅ Resolved global image: ${imageId}`);
         return base64Data;
       } else {
         console.warn(`Image not found in global storage: ${imageId}`);

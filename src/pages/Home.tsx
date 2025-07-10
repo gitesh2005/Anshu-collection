@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Star, Truck, Shield, RotateCcw, ArrowRight, MessageCircle, Phone, Sparkles, Heart, Award, Users } from 'lucide-react';
 import { Product } from '../types/Product';
 import { ProductCard } from '../components/ProductCard';
+import { ImageDisplay } from '../components/ImageDisplay';
 
 interface HomeProps {
   featuredProducts: Product[];

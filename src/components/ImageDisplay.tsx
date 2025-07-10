@@ -7,6 +7,7 @@ interface ImageDisplayProps {
   className?: string;
   fallbackSrc?: string;
   onError?: () => void;
+  onClick?: () => void;
 }
 
 export function ImageDisplay({ 
@@ -14,7 +15,8 @@ export function ImageDisplay({
   alt, 
   className = '', 
   fallbackSrc = 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg',
-  onError 
+  onError,
+  onClick
 }: ImageDisplayProps) {
   const [imageSrc, setImageSrc] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
@@ -26,8 +28,13 @@ export function ImageDisplay({
         setIsLoading(true);
         setHasError(false);
         
+        console.log(`🔍 Loading image: ${src}`);
+        
         // Resolve the image URL (handles global-image:// URLs)
         const resolvedUrl = resolveImageUrl(src);
+        
+        console.log(`✅ Resolved to: ${resolvedUrl.substring(0, 50)}...`);
+        
         setImageSrc(resolvedUrl);
       } catch (error) {
         console.error('Error resolving image URL:', error);
@@ -49,6 +56,7 @@ export function ImageDisplay({
 
   const handleImageError = () => {
     if (!hasError) {
+      console.warn(`❌ Image failed to load: ${src}`);
       setHasError(true);
       setImageSrc(fallbackSrc);
       if (onError) onError();
@@ -56,6 +64,7 @@ export function ImageDisplay({
   };
 
   const handleImageLoad = () => {
+    console.log(`✅ Image loaded successfully: ${src}`);
     setIsLoading(false);
   };
 
@@ -74,6 +83,7 @@ export function ImageDisplay({
       className={className}
       onError={handleImageError}
       onLoad={handleImageLoad}
+      onClick={onClick}
       loading="lazy"
     />
   );

@@ -44,15 +44,14 @@ export function useProducts() {
           const parsed = JSON.parse(savedProducts);
           
           if (Array.isArray(parsed)) {
-            // Ensure all images are properly resolved
-            const resolvedProducts = parsed.map(product => ({
+            // Process products and ensure proper date handling
+            const processedProducts = parsed.map(product => ({
               ...product,
-              images: product.images.map((img: string) => resolveImageUrl(img)),
               createdAt: product.createdAt instanceof Date ? product.createdAt : new Date(product.createdAt),
               updatedAt: product.updatedAt instanceof Date ? product.updatedAt : new Date(product.updatedAt)
             }));
             console.log(`Loaded ${parsed.length} products from storage`);
-            setProducts(resolvedProducts);
+            setProducts(processedProducts);
           } else {
             console.warn('Saved products is not an array, using sample products');
             await initializeWithSampleProducts();

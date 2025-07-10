@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, MessageCircle, Phone, Mail, MapPin, Send } from 'lucide-react';
 import { Product } from '../types/Product';
+import { ImageDisplay } from './ImageDisplay';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -78,7 +79,7 @@ export function ContactModal({ isOpen, onClose, selectedProduct }: ContactModalP
             <div className="mb-6 p-4 bg-red-900 bg-opacity-20 rounded-lg border border-red-700">
               <h3 className="font-semibold text-red-400 mb-2">Inquiring about:</h3>
               <div className="flex items-center space-x-3">
-                <img
+                <ImageDisplay
                   src={selectedProduct.images[0]}
                   alt={selectedProduct.name}
                   className="w-16 h-16 object-cover rounded-lg"

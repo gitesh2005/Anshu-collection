@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
 import { CartItem } from '../types/Product';
+import { ImageDisplay } from './ImageDisplay';
 
 interface ShoppingCartProps {
   isOpen: boolean;
@@ -56,7 +57,7 @@ export function ShoppingCart({
               {cartItems.map((item, index) => (
                 <div key={`${item.product.id}-${item.selectedSize}-${item.selectedColor}-${index}`} className="border-b pb-4">
                   <div className="flex space-x-4">
-                    <img
+                    <ImageDisplay
                       src={item.product.images[0]}
                       alt={item.product.name}
                       className="w-16 h-16 object-cover rounded-lg"
