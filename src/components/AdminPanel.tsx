@@ -596,6 +596,11 @@ export function AdminPanel({
                         {image.startsWith('global-image://') ? `Uploaded Image ${index + 1}` : 
                          image.startsWith('data:') ? `Local Image ${index + 1}` : 
                          `Image ${index + 1} (URL)`}
+                        <div className="text-xs text-gray-500 mt-1">
+                          {image.startsWith('global-image://') ? '🌐 Global Storage' : 
+                           image.startsWith('data:') ? '💾 Local Storage' : 
+                           '🔗 External URL'}
+                        </div>
                       </div>
                       <button
                         type="button"
